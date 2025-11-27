@@ -42,16 +42,58 @@
 
 ## 🎨 Design System (Brief)
 
+### Design Goals
+- **Professional-Grade**: Terlihat seperti SaaS product yang worth $$/month, bukan tool gratisan asal jadi.
+- **Freemium Teaser**: Show locked features dengan badge "🔒 Login untuk Save Draft" → create desire to upgrade.
+- **Trust Signals**: Tampilkan user count, paragraphs processed today, testimonials (even if mock at start).
+
 ### Color Palette
 - **Primary**: `Blue-600` (#2563eb) - Trust, Tech, Professional.
-- **Secondary**: `Emerald-500` (#10b981) - Success, Safe, Correct.
-- **Background**: `Slate-50` (#f8fafc) - Clean, Readability.
-- **Text**: `Slate-900` (#0f172a) - High Contrast.
+- **Accent**: `Emerald-500` (#10b981) - Success, Action, "Go".
+- **Premium**: `Purple-600` (#9333ea) - Exclusive, Upgrade, Premium features.
+- **Background**: `Slate-50` (#f8fafc) - Clean, Modern, Premium feel.
+- **Text**: `Slate-900` (#0f172a) - High Contrast, Readable.
 
 ### Typography
-- **Font**: `Inter` atau `Plus Jakarta Sans` (Modern, Readable, Google Fonts).
+- **Font**: `Inter` atau `Plus Jakarta Sans` (Modern, Professional).
+- **Hierarchy**:
+  - H1: 48px, Bold (Landing CTA)
+  - H2: 32px, SemiBold (Section headers)
+  - Body: 16px, Regular (Readable)
+  - Small: 14px (Meta info, ads disclaimer)
 
 ### UI Components
-- **Card**: White bg, soft shadow, rounded-xl.
-- **Button**: Pill shape, gradient hover effect.
-- **Input Area**: Minimalist border, focus ring.
+- **Card**: White bg, subtle shadow `shadow-lg`, rounded-xl, border `border-gray-200`.
+- **Button Primary**: Gradient `from-blue-600 to-blue-700`, bold text, `shadow-md hover:shadow-xl`.
+- **Button Premium**: Gradient `from-purple-600 to-purple-700` with sparkle icon ✨.
+- **Input Area**: Clean border, smooth focus ring, placeholder with helpful hint.
+- **Premium Badge**: Small pill badge `🔒 Login` with purple bg, white text.
+
+### Freemium "Intip" Strategy
+Show locked features prominently dengan value prop:
+
+**Example UI Card** (Visible to all users):
+```
+┌─────────────────────────────────────┐
+│ 💾 Save Draft                  🔒   │
+│ ───────────────────────────────────  │
+│ Simpan progress untuk lanjut nanti   │
+│ • Sampai 5 draft                     │
+│ • Auto-save setiap 30 detik          │
+│ • Akses dari device mana pun         │
+│                                      │
+│ [🔓 Login dengan Google - Gratis]   │
+└─────────────────────────────────────┘
+```
+
+**History Panel** (Grayed out if not logged in):
+```
+┌─────────────────────────────────────┐
+│ 📜 History (Last 10)           🔒   │
+│ ───────────────────────────────────  │
+│ (blur effect + overlay)              │
+│   "Login untuk lihat riwayat Anda"   │
+│                                      │
+│ [Login untuk Akses]                 │
+└─────────────────────────────────────┘
+```
