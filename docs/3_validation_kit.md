@@ -1,9 +1,15 @@
 # 3. Validation Kit ✅
 
 ## 🧪 Hypotheses to Test
-1. **Problem**: Orang butuh paraphrase *dokumen* langsung, bukan cuma copy-paste teks.
-2. **Solution**: Hasil model IndoT5 cukup bagus untuk standar akademik/formal.
-3. **Monetization**: User tidak keberatan dengan iklan asalkan tool gratis.
+
+### ✅ VALIDATED (From Real Users)
+1. ~~**Problem**: Orang butuh paraphrase *dokumen* langsung~~ → **PIVOT**: User mau **pilih paragraph**, bukan full doc.
+2. ~~Full landing page with marketing copy~~ → **REJECTED**: User mau immediate action, no fluff.
+3. **NEW**: User butuh save draft untuk teks panjang (requires auth).
+
+### 🔍 STILL TO VALIDATE
+1. **Solution**: Hasil model IndoT5 cukup bagus untuk standar akademik/formal.
+2. **Monetization**: User tidak keberatan dengan iklan agresif asalkan tool gratis.
 
 ## 🔍 Validation Experiments
 
@@ -24,6 +30,28 @@
 - **Action**: Pasang 1 banner iklan.
 - **Metric**: Bounce rate & Time on Site.
 - **Success Criteria**: Bounce rate <60%.
+
+## ✅ Real User Feedback (Received)
+
+**Date**: Nov 2024
+**Sample Size**: Small focus group (early users)
+
+### Key Findings:
+1. **"Langsung action, no fluff"** (100% agreement)
+   - Users want immediate access to textarea
+   - Marketing copy di hero section = ignored/annoying
+   - **Action Taken**: Removed hero marketing, giant textarea di atas fold
+
+2. **"Save for later"** (80% requested)
+   - Untuk teks panjang (>1000 words), users want to save progress
+   - Willing to login if it means saving work
+   - **Action Taken**: Implemented Google OAuth + D1 draft storage (max 5)
+
+3. **"Selective paraphrase"** (90% prefer)
+   - Users don't want full-doc paraphrase
+   - Want to click specific paragraphs only
+   - Saves time & lets them keep good paragraphs unchanged
+   - **Action Taken**: Built 3-stage flow (input → select → result)
 
 ## 📋 Interview Questions (untuk User Test)
 1. "Biasanya pakai tool apa buat paraphrase?"
