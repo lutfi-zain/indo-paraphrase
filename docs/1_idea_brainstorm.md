@@ -20,16 +20,16 @@
 ## 🌟 Unique Selling Points (USP)
 - **100% Gratis & Tanpa Login** (untuk fitur dasar).
 - **Support Dokumen Panjang** (via paragraph splitting).
+- **Limit Fair Usage**: Max 5MB atau ~2000 kata per proses (untuk menjaga server tetap gratis).
 - **Infrastruktur Cepat** (Cloudflare Edge).
 - **Privasi**: Dokumen tidak disimpan permanen (processed on-the-fly).
 
 ## 💰 Monetization Ideas
-1. **Display Ads**: Banner iklan di samping/bawah hasil paraphrase.
-2. **Native Ads**: Iklan yang menyatu dengan konten (misal: rekomendasi tool grammar).
-3. **Donation/Support**: "Traktir Kopi" button.
-4. **Premium (Future)**: Hapus iklan, prioritas antrian, support .docx/.pdf, mode "Formal/Santai".
+1. **Aggressive Display Ads**: Banner iklan di segala sisi (Top, Bottom, Sidebar).
+2. **Native Ads**: Iklan yang menyatu dengan konten.
+3. **Interstitial Ads**: Iklan layar penuh sebelum download file.
+4. **Donation/Support**: "Traktir Kopi" button.
 
 ## 🚀 Growth Loops
-- **Watermark (Soft)**: "Paraphrased by IndoParaphrase" di footer file hasil (bisa dihapus user, tapi default ada).
 - **SEO Strategy**: Target keyword "paraphrase online indonesia", "cek plagiarisme gratis", "ubah kalimat online".
 - **Viral Loop**: Share hasil unik ke sosmed (Twitter/X thread generator).

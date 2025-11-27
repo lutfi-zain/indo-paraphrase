@@ -2,16 +2,17 @@
 
 ## 🏗️ Technical Architecture (Cloudflare Monorepo)
 
-### Stack
-- **Frontend**: React + Vite + TailwindCSS (Deployed di Cloudflare Pages).
+### Stack (SEO Optimized)
+- **Frontend**: **Astro** (SSG/SSR) + React (Islands Architecture).
+  - *Why Astro?* Performa HTML statis maksimal untuk SEO, tapi tetap bisa pakai React untuk komponen interaktif (uploader/paraphraser).
+- **Styling**: TailwindCSS.
 - **Backend (BFF)**: Hono.js (Deployed di Cloudflare Workers).
 - **AI Engine**: HuggingFace Spaces (Existing Gradio API).
-- **Database (Optional)**: Cloudflare D1 (untuk simpan log/feedback user, bukan konten dokumen).
 
 ### Architecture Diagram
 ```mermaid
 graph LR
-    User[User Browser] -- HTTPS --> CF[Cloudflare Pages (React)]
+    User[User Browser] -- HTTPS --> CF[Cloudflare Pages (Astro)]
     CF -- API Req --> Worker[Hono Worker (BFF)]
     Worker -- Inference Req --> HF[HuggingFace Space (IndoT5)]
     HF -- Result --> Worker
@@ -22,30 +23,29 @@ graph LR
 ## 📱 Product Features (MVP)
 
 ### P0 (Must Have - Launch)
-1. **Landing Page SEO Friendly**: H1, Meta Tags, Content rich keywords.
+1. **Landing Page SEO Friendly**: Astro SSG untuk load speed 100/100 di Lighthouse.
 2. **File Uploader**: Drag & drop area (.txt, .md).
-3. **Text Input**: Textarea untuk copy-paste manual (max 5000 chars).
-4. **Paraphrase Engine**: Integrasi ke HF Space API.
-5. **Result Viewer**: Side-by-side comparison (Original vs Paraphrased).
-6. **Copy/Download**: Tombol copy teks dan download file hasil.
-7. **AdSense Slots**: Placeholder untuk iklan (Top Banner, Sidebar, Bottom).
+3. **Paraphrase Engine**: Integrasi ke HF Space API.
+4. **Result Viewer**: Side-by-side comparison.
+5. **Download System**: Dengan halaman interstitial (iklan dulu baru download).
+6. **AdSense Slots**: Placeholder untuk iklan agresif.
 
-### P1 (Nice to Have - Next Update)
-1. **History**: Simpan 5 riwayat terakhir di LocalStorage.
-2. **Feedback Loop**: Tombol Like/Dislike untuk fine-tuning model kedepannya.
-3. **Dark Mode**: Toggle tema.
+## 💰 Monetization Strategy Implementation (High Density)
 
-## 💰 Monetization Strategy Implementation
+### Ad Placements ("The Porn Site Strategy" - Clean Version)
+Target: Maximize Viewability & Clicks tanpa merusak fungsi utama.
 
-### Ad Placements
-1. **Top Leaderboard (728x90)**: Di atas header, terlihat pertama kali.
-2. **Sidebar (300x250)**: Di sebelah kanan input area (desktop only).
-3. **In-Feed/Native**: Di antara input box dan result box (mobile friendly).
-4. **Download Interstitial (Optional)**: Tampilkan iklan modal saat klik download (high value).
+1. **Sticky Top Leaderboard (728x90)**: Selalu nempel di atas layar.
+2. **Sticky Bottom Anchor (320x50 / 728x90)**: Selalu nempel di bawah layar (Mobile & Desktop).
+3. **Double SkyScraper (160x600)**: Kiri DAN Kanan konten utama (Desktop only).
+4. **Native In-Feed**: Di antara kotak Input dan Output.
+5. **Interstitial Page**: Saat klik "Download", user diarahkan ke halaman khusus (tunggu 5 detik) yang isinya iklan besar (300x250 atau 336x280) sebelum file terunduh.
+6. **Pop-under (Optional)**: Jika revenue kurang, aktifkan pop-under 1x per 24 jam per user (hati-hati UX).
 
 ### SEO Strategy for Traffic
+- **Tech**: Astro menjamin HTML murni ter-render di server (bukan client-side rendering kosong ala React SPA biasa).
 - **Keywords**: "paraphrase indonesia", "cek plagiat gratis", "rewrite artikel", "bot nulis".
-- **Blog Section**: Buat artikel tips menulis skripsi/artikel di sub-folder `/blog` (support by Cloudflare Pages).
+- **Blog Section**: `/blog` menggunakan Astro Content Collections (Markdown) untuk artikel tips skripsi.
 
 ## 📅 Roadmap
 - **Week 1**: Setup Monorepo, Porting UI Gradio ke React, Integrasi Hono -> HF.
