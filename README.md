@@ -59,7 +59,7 @@ python app.py
    
    Atau gunakan Git:
    ```bash
-   git clone https://huggingface.co/spaces/USERNAME/SPACENAME
+   git clone https://huggingface.co/spaces/0xbujang/indonesia-paraphrase
    cd SPACENAME
    cp /path/to/indo-paraphrase/app.py .
    cp /path/to/indo-paraphrase/requirements.txt .
@@ -72,7 +72,7 @@ python app.py
 
 5. **Aplikasi sudah live!** 🎉
 
-URL aplikasi Anda: `https://huggingface.co/spaces/USERNAME/SPACENAME`
+URL aplikasi Anda: `https://huggingface.co/spaces/0xbujang/indonesia-paraphrase`
 
 ## 📖 Cara Penggunaan
 
