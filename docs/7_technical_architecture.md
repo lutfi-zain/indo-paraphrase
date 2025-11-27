@@ -40,6 +40,122 @@ graph TB
 - ✅ **Edge Rendering**: Astro running di Cloudflare Edge = <50ms TTFB globally
 
 **Styling**: TailwindCSS v4 (Vite plugin)
+- Utility-first untuk rapid development
+- JIT compiler = minimal CSS bundle (~10KB gzipped)
+- Custom design tokens untuk brand consistency
+
+**UI Components Library** (Optimized for BLAZING FAST ⚡):
+
+**Primary: shadcn/ui (FULL SUITE)** - Best DX & Consistency
+
+**Why Full shadcn?**
+- ✅ **Konsisten**: Semua komponen match style & behavior
+- ✅ **Copy-paste**: Masuk ke codebase, bukan node_modules (full control)
+- ✅ **Type-safe**: TypeScript throughout
+- ✅ **Accessible**: Built on Radix UI (WCAG 2.1 AA)
+- ✅ **Customizable**: Modify langsung di `src/components/ui/`
+- ✅ **Dark mode ready**: Built-in support
+
+**Components to Use** (Install as needed):
+```bash
+npx shadcn-ui@latest add button input textarea card dialog dropdown-menu tooltip tabs toast progress badge separator
+```
+
+**Optimization Strategy** (Keep Bundle <50KB):
+
+**1. Tree-Shaking (Automatic)**
+- shadcn = source code in repo, Vite auto tree-shakes unused exports
+- Only compiled code yang di-import masuk bundle
+
+**2. Lazy Loading (Astro Islands)**
+```astro
+<!-- Heavy modals: Load on interaction -->
+<ShareDialog client:idle />
+<LoginDialog client:visible />
+
+<!-- Editor: Load immediately -->
+<ParaphraseEditor client:load />
+
+<!-- Static components: No JS -->
+<Card>...</Card> <!-- Pure HTML/CSS -->
+```
+
+**3. Code Splitting**
+```typescript
+// Dynamic import for heavy features
+const AdvancedEditor = lazy(() => import('./AdvancedEditor'));
+```
+
+**4. Bundle Analysis**
+```bash
+# Check bundle size after build
+npm run build
+npx vite-bundle-visualizer
+```
+
+**Target: Remove unused Radix primitives**
+- If hanya pakai 8 shadcn components → cuma 8 Radix primitives loaded
+- Auto tree-shake sisanya
+
+**5. CSS Optimization**
+- Tailwind JIT: Only used classes compiled
+- PurgeCSS in production: Auto-remove unused
+- Critical CSS: Inline above-the-fold styles
+
+**Bundle Size Breakdown** (Realistic with Full shadcn):
+- TailwindCSS: ~12KB
+- shadcn components (12 pcs): ~25KB
+- Radix primitives (peer deps): ~15KB
+- Custom code: ~8KB
+- **Total: ~60KB** (still fast!)
+
+**Performance Optimizations**:
+1. **Component Lazy Load**: Non-critical UI loads on-demand
+2. **Image Optimization**: WebP, lazy load, blur placeholders
+3. **Font Subsetting**: Only Latin + Indonesian chars
+4. **Preload Critical**: `<link rel="preload">` for above-fold
+5. **Service Worker**: Cache UI components (PWA ready)
+
+**Comparison Updated**:
+| Strategy | Bundle | Speed | DX | Maintainability | Verdict |
+|----------|--------|-------|----|----|---------|
+| **Full shadcn + Optimize** | ~60KB | ⚡⚡⚡ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ✅ **BEST** |
+| Selective shadcn | ~30KB | ⚡⚡⚡⚡ | ⭐⭐⭐ | ⭐⭐ | ⚠️ Inconsistent |
+| Pure Tailwind DIY | ~10KB | ⚡⚡⚡⚡ | ⭐⭐ | ⭐ | ❌ Too manual |
+| Material UI | ~200KB | 🐌 | ⭐⭐⭐ | ⭐⭐⭐⭐ | ❌ Too slow |
+
+**Setup**:
+```bash
+# Initialize shadcn
+npx shadcn-ui@latest init
+
+# Config (choose during init)
+- Style: Default
+- Color: Slate
+- CSS variables: Yes
+- Tailwind config: Yes
+
+# Install all needed components
+npx shadcn-ui@latest add button input textarea card dialog dropdown-menu tooltip tabs toast progress badge separator
+```
+
+**Result**:
+- ⚡ First Load: <1s (60KB gzipped = ~200KB raw, fast 4G = 0.8s)
+- ⚡ Lighthouse Performance: 95+ (still excellent)
+- 🎨 Consistent, beautiful UI
+- 👨‍💻 Excellent developer experience
+- 🔧 Easy to maintain & extend
+
+**Why 60KB is Still "Blazing Fast"**:
+- Twitter.com: 500KB+ JS
+- Facebook.com: 800KB+ JS  
+- Medium.com: 300KB+ JS
+- **Us: 60KB total** = 5-10x lebih ringan! 🚀
+
+**State Management**: 
+- React `useState` untuk local component state (sufficient untuk MVP)
+- No Redux/Zustand needed (over-engineering untuk simple app)
+
 **Interactive Components** (React Islands):
 1. `ParaphraseEditor.tsx` - Main editor with 3-stage flow
 2. `AuthButton.tsx` - Google OAuth login/logout
