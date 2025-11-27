@@ -20,15 +20,32 @@ graph LR
     CF -- Render --> User
 ```
 
-## 📱 Product Features (MVP)
+## 📱 Product Features (MVP) - Updated Based on User Feedback
 
 ### P0 (Must Have - Launch)
-1. **Landing Page SEO Friendly**: Astro SSG untuk load speed 100/100 di Lighthouse.
-2. **File Uploader**: Drag & drop area (.txt, .md).
-3. **Paraphrase Engine**: Integrasi ke HF Space API.
-4. **Result Viewer**: Side-by-side comparison.
-5. **Download System**: Dengan halaman interstitial (iklan dulu baru download).
-6. **AdSense Slots**: Placeholder untuk iklan agresif.
+1. **Immediate Action UI**: 
+   - Giant textarea langsung di hero section (no scroll needed).
+   - Placeholder: "Paste atau ketik teks Anda di sini untuk paraphrase...".
+   - Instant action button visible.
+
+2. **Selective Paraphrase**:
+   - Setelah paste, teks otomatis di-split per paragraph.
+   - Each paragraph dapat di-klik untuk select/deselect.
+   - Tombol "Paraphrase Selected" hanya memproses yang dipilih.
+   - UI: Checkbox per paragraph atau highlight on click.
+
+3. **Authentication (Google OAuth)**:
+   - Login button di top-right corner.
+   - Untuk fitur "Save for Later" (drafts).
+
+4. **Save for Later**:
+   - Jika user login, bisa save current state (original text + selected paragraphs).
+   - Database: Cloudflare D1 (store user_id, document_text, timestamp).
+   - Max 5 saved drafts per user (free tier).
+
+5. **Download System**: Interstitial ad page before download.
+
+6. **AdSense Slots**: As per aggressive strategy.
 
 ## 💰 Monetization Strategy Implementation (High Density)
 

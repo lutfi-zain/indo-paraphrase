@@ -27,29 +27,39 @@ Home (/)
     └── Social Icons
 ```
 
-## 🔄 User Flow Diagram
+## 🔄 User Flow Diagram (Updated with Selective Paraphrase)
 
 ```mermaid
 flowchart TD
-    Start[User Lands on Site] --> Choice{Input Type?}
+    Start[User Lands on Site] --> DirectPaste[Giant Textarea Visible]
     
-    Choice -- Text --> TextInput[Type/Paste Text]
-    Choice -- File --> FileUpload[Upload .txt/.md]
+    DirectPaste --> Input{Input Method?}
+    Input -- Paste/Type --> TextSplit[Auto-split to Paragraphs]
+    Input -- Upload File --> FileUpload[Upload .txt/.md]
     
-    TextInput --> Validate[Check Length]
-    FileUpload --> ValidateFile[Check Format/Size]
+    FileUpload --> TextSplit
     
-    Validate --> Process[Click Paraphrase]
-    ValidateFile --> Process
+    TextSplit --> Display[Display Paragraphs with Checkboxes]
+    Display --> Select[User Clicks to Select/Deselect]
     
+    Select --> CheckAuth{Logged In?}
+    CheckAuth -- No --> DirectParaphrase[Click 'Paraphrase Selected']
+    CheckAuth -- Yes --> SaveOption{Save Draft?}
+    
+    SaveOption -- Yes --> SaveToDB[Save to D1]
+    SaveOption -- No --> DirectParaphrase
+    
+    DirectParaphrase --> Process[Process Selected Only]
     Process --> Loading[Show Progress & Ads]
     Loading --> API[Call Hono/HF API]
     API --> Result[Display Result]
     
     Result --> Actions{Next Action?}
     Actions -- Copy --> CopyText[Copy to Clipboard]
-    Actions -- Download --> DownloadFile[Download File]
-    Actions -- Retry --> Start
+    Actions -- Download --> Interstitial[Ad Page 5s]
+    Actions -- Edit More --> Select
+    
+    Interstitial --> DownloadFile[Download File]
 ```
 
 ## 📂 Directory Structure (Monorepo)

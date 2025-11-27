@@ -1,5 +1,18 @@
 # 5. UX Research & Blueprint 🎨
 
+## ⚡ Critical User Feedback (Real Users)
+
+### Feedback Summary
+1. **"Langsung action, no fluff"**: User wants immediate access to paraphrase tool on landing (paste/type), tidak perlu scroll atau baca dulu.
+2. **"Save for later"**: Untuk teks panjang, user butuh fitur save progress (requires account/login).
+3. **"Selective paraphrase"**: User mau bisa **klik bagian tertentu** untuk di-paraphrase, bukan seluruh dokumen sekaligus.
+
+### Design Implications
+- ❌ **Remove**: Hero section dengan marketing copy panjang.
+- ✅ **Add**: Giant textarea langsung di atas fold dengan placeholder "Paste teks Anda di sini...".
+- ✅ **Add**: Authentication system (Google OAuth simple).
+- ✅ **Add**: Interactive text editor dengan highlight & click-to-paraphrase per paragraph.
+
 ## 👥 User Personas
 
 ### 1. Budi si Mahasiswa (The Deadline Fighter)
