@@ -37,10 +37,37 @@
    - Max 50 dokumen per hari per user
    - No cooldown (reset langsung jam berikutnya)
    
-   **"Pay with Exposure" Bonus**:
-   - Review Google Play/App Store → +10 dokumen instant
-   - Share ke Twitter/Facebook (verified) → +5 dokumen per share (max 2x/hari)
-   - Total bonus max: +20 dokumen per hari
+   **"Pay with Exposure" Bonus (Auto-Verified)**:
+   
+   **Option 1: Twitter Share (Fully Automated)**
+   - User klik "Share to Twitter" button
+   - Auto-generate tweet: "Baru coba IndoParaphrase untuk paraphrase skripsi, gratis & keren! 🔥 [link dengan unique referral code]"
+   - User post tweet (dengan referral code unik per user)
+   - Backend verify via Twitter API:
+     - Check tweet exists dengan mention @IndoParaphrase
+     - Check referral code match
+     - Check tweet not deleted (48h window)
+   - Reward: +5 dokumen instant setelah verified
+   - Limit: Max 2x per minggu (prevent spam)
+   
+   **Option 2: Referral Program (Trackable)**
+   - User dapat unique referral link: `indoparaphrase.com?ref=USER123`
+   - Share link ke mana saja (WA, Telegram, dll)
+   - Setiap new user yang signup via link → original user dapat +2 dokumen
+   - Max 50 dokumen per bulan dari referral
+   - Benefit: Organic growth tanpa manual verify
+   
+   **Option 3: Weekly Contest (Engagement Bait)**
+   - Post "best before-after paraphrase result" setiap minggu
+   - Auto-generate shareable image (watermark IndoParaphrase)
+   - User share dengan hashtag #IndoParaphraseChallenge
+   - Top 10 most-liked posts → 1 minggu unlimited access
+   - Verify: Scrape hashtag, count likes, auto-announce winner
+   
+   **Why REMOVED: App Store Review Bonus**
+   - ❌ Google Play Review API butuh verified publisher (ribet setup)
+   - ❌ App Store Review tidak punya public API (impossible to auto-verify)
+   - ❌ Screenshot review = manual verification = not scalable
    
    **Protection Mechanisms**:
    - Auto-split paragraf >200 kata (free) atau >400 kata (login) menjadi chunks
@@ -58,7 +85,10 @@
 - **Fair Limits (Multi-Layer Protection)**: 
   - **Free**: 10 para/doc (max 200 kata/para), 5 doc/jam, 20 doc/hari per IP
   - **Login**: 20 para/doc (max 400 kata/para), 10 doc/jam, 50 doc/hari
-  - **Exposure Bonus**: Review app (+10 doc), Share sosmed (+5 doc/share, max 2x/hari)
+  - **Exposure Bonus (Auto-Verified)**: 
+    - Twitter share (+5 doc/share, max 2x/week via API verify)
+    - Referral link (+2 doc per signup, max 50/month)
+    - Weekly contest (top 10 → 1 week unlimited)
   - **Anti-Abuse**: Auto-chunk paragraf panjang, fingerprint tracking, bot detection
 - **Infrastruktur Cepat** (Cloudflare Edge).
 - **Privasi**: Dokumen tidak disimpan permanen (processed on-the-fly), kecuali user opt-in save draft.
