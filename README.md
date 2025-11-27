@@ -1,136 +1,77 @@
-# 📝 Paraphrase Dokumen Bahasa Indonesia
+# Indo-Paraphrase Monorepo
 
-Web application untuk melakukan paraphrase dokumen bahasa Indonesia secara otomatis menggunakan model **IndoT5-base-paraphrase**.
+Web app untuk paraphrase dokumen bahasa Indonesia dengan monetisasi iklan.
 
-## ✨ Fitur
+## 📁 Structure
 
-- 📄 Upload dokumen format `.txt` atau `.md`
-- 🤖 Paraphrase otomatis menggunakan model T5 khusus bahasa Indonesia
-- 📊 Progress tracking untuk dokumen panjang
-- 💾 Download hasil paraphrase
-- 🎨 Interface yang user-friendly dengan Gradio
+```
+indo-paraphrase/
+├── apps/
+│   ├── web/          # Astro frontend (Cloudflare Pages)
+│   └── api/          # Hono backend (Cloudflare Workers)
+├── docs/             # Business & product documentation
+└── README.md
+```
 
-## 🚀 Cara Menggunakan (Lokal)
+## 🚀 Development
 
-### Prerequisites
-
-- Python 3.8 atau lebih baru
-- pip
-
-### Instalasi
-
-1. Clone repository ini:
+### Frontend (Astro)
 ```bash
-git clone <repository-url>
-cd indo-paraphrase
+cd apps/web
+npm install
+npm run dev
 ```
 
-2. Install dependencies:
+### Backend (Hono)
 ```bash
-pip install -r requirements.txt
+cd apps/api
+npm install
+npm run dev
 ```
 
-3. Jalankan aplikasi:
+## 🌐 Deployment
+
+### Frontend to Cloudflare Pages
 ```bash
-python app.py
+cd apps/web
+npm run build
+wrangler pages deploy dist
 ```
 
-4. Buka browser dan akses URL yang muncul di terminal (biasanya `http://127.0.0.1:7860`)
-
-## 🌐 Deploy ke HuggingFace Spaces (GRATIS!)
-
-### Cara Deploy:
-
-1. **Buat akun HuggingFace** (jika belum punya):
-   - Kunjungi [huggingface.co](https://huggingface.co) dan sign up
-
-2. **Buat Space baru**:
-   - Klik profil → "New Space"
-   - Pilih nama untuk Space Anda
-   - Pilih SDK: **Gradio**
-   - Pilih Hardware: **CPU Basic** (gratis)
-   - Klik "Create Space"
-
-3. **Upload files**:
-   - Upload file-file berikut ke Space Anda:
-     - `app.py`
-     - `requirements.txt`
-     - `README.md` (opsional)
-   
-   Atau gunakan Git:
-   ```bash
-   git clone https://huggingface.co/spaces/0xbujang/indonesia-paraphrase
-   cd SPACENAME
-   cp /path/to/indo-paraphrase/app.py .
-   cp /path/to/indo-paraphrase/requirements.txt .
-   git add .
-   git commit -m "Initial commit"
-   git push
-   ```
-
-4. **Tunggu build selesai** (~2-3 menit)
-
-5. **Aplikasi sudah live!** 🎉
-
-URL aplikasi Anda: `https://huggingface.co/spaces/0xbujang/indonesia-paraphrase`
-
-## 📖 Cara Penggunaan
-
-1. Klik tombol "Upload File" dan pilih dokumen `.txt` atau `.md` Anda
-2. Klik tombol "🚀 Paraphrase Dokumen"
-3. Tunggu proses selesai (akan ada progress bar)
-4. Download hasil paraphrase dengan klik file yang muncul
-
-## ⚙️ Cara Kerja
-
-Aplikasi ini:
-1. Membaca file yang di-upload
-2. Memisahkan dokumen menjadi paragraf-paragraf
-3. Melakukan paraphrase untuk setiap paragraf menggunakan model IndoT5
-4. Menggabungkan kembali hasil paraphrase
-5. Menyediakan file hasil untuk di-download
-
-## ⚠️ Limitasi
-
-- Model memiliki batas 512 token per paragraf
-- Kadang hasil paraphrase mengandung informasi yang tidak ada di teks asli (hallucination)
-- Kualitas terbaik untuk teks formal bahasa Indonesia
-
-## 🔧 Teknologi yang Digunakan
-
-- **[Gradio](https://gradio.app/)** - Web interface
-- **[Transformers](https://huggingface.co/docs/transformers)** - Model inference
-- **[PyTorch](https://pytorch.org/)** - Deep learning framework
-- **[IndoT5-base-paraphrase](https://huggingface.co/Wikidepia/IndoT5-base-paraphrase)** - Pretrained model
-
-## 📝 Contoh
-
-**Input**:
-```
-Anak anak melakukan piket kelas agar kebersihan kelas terjaga.
-Mereka sangat senang membantu guru.
+### Backend to Cloudflare Workers
+```bash
+cd apps/api
+npm run deploy
 ```
 
-**Output** (contoh):
+### Setup D1 Database
+```bash
+cd apps/api
+wrangler d1 create paraphrase_db
+wrangler d1 execute paraphrase_db --file=schema.sql
 ```
-Para siswa melaksanakan piket di kelas supaya kelas tetap bersih.
-Mereka dengan gembira membantu tenaga pengajar.
-```
 
-## 🙏 Credits
+Update `wrangler.toml` with your D1 database ID.
 
-- Model oleh [Wikidepia](https://huggingface.co/Wikidepia)
-- Trained on translated PAWS dataset
-- Thanks to Tensorflow Research Cloud for TPU support
+## ⚙️ Environment Variables
 
-## 📄 License
+### API (wrangler.toml)
+- `GOOGLE_CLIENT_ID`: Your Google OAuth client ID
+- `HUGGINGFACE_API_URL`: HuggingFace Space API endpoint
 
-MIT License - Silakan digunakan secara bebas!
+## 📚 Documentation
 
-## 🤝 Kontribusi
+See `/docs` folder for:
+- Business strategy
+- UX research
+- Technical specs
+- Monetization strategy
 
-Kontribusi sangat welcome! Silakan buat PR atau issue untuk improvement.
+## 🎯 Features
 
----
-
-**Made with ❤️ for Indonesian NLP Community**
+- ✅ Selective paragraph paraphrase
+- ✅ Google OAuth authentication
+- ✅ Save drafts (max 5 per user)
+- ✅ SEO optimized (Astro SSG)
+- ✅ Aggressive ad monetization
+- ✅ Cloudflare Edge deployment

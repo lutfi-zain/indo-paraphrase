@@ -1,0 +1,12 @@
+name = "indo-paraphrase-api"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "paraphrase_db"
+database_id = "your-d1-database-id"
+
+[vars]
+GOOGLE_CLIENT_ID = "your-google-client-id"
+HUGGINGFACE_API_URL = "https://0xbujang-indonesia-paraphrase.hf.space/api/predict"
